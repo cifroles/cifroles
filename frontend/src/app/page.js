@@ -271,19 +271,20 @@ const thicknesses = [
 ]
 
 export default function Home() {
-  
-  const tableRef = useRef(null);
 
+  const tableRef = useRef(null);
+  const thicknessStep = ['1', '8', '10', '12', '14', '16', '18', '20', '22', '24', '26', '28', '30', '32', '34',
+    '36', '38', '40', '42', '44', '46', '48', '50', '52', '54', '56', '58', '60', '62', '64']  
   const handleButtonClick = () => {
     const table = tableRef.current;
     const rows = table.getElementsByTagName('tr');
-    let values = [];
+    let values = {};
   
-    for (let i = 0; i < rows.length; i++) {
-      const cells = rows[i].getElementsByTagName('td');
+    for (let i = 0; i < rows.length - 3; i++) {
+      const cells = rows[i + 3].getElementsByTagName('td');
       let rowValues = {};
   
-      for (let j = 0; j < cells.length; j++) {
+      for (let j = 1; j < cells.length; j++) {
         const input = cells[j].getElementsByTagName('input')[0];
         if (input) {
           rowValues[`cell${j}`] = input.value;
@@ -291,8 +292,7 @@ export default function Home() {
           rowValues[`cell${j}`] = cells[j].innerText;
         }
       }
-  
-      values.push(rowValues);
+      values[thicknessStep[i]] = rowValues;
     }
   
     const jsonValues = JSON.stringify(values);
