@@ -20,5 +20,5 @@ from cifroles import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("test/", views.index, name='test'),
+    path("tree-count/", views.TreeCountSheet.as_view()),
 ]
