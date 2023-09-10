@@ -1,6 +1,4 @@
 'use client';
-import { Tiro_Bangla } from 'next/font/google';
-import Image from 'next/image'
 import React, { forwardRef, useRef } from 'react';
 
 
@@ -33,6 +31,20 @@ export default function Home() {
     const jsonValues = JSON.stringify(values);
     console.log(jsonValues);
     console.log(jsonValues.length);
+
+    fetch('http://localhost:8000/tree-count/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonValues,
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+
   };
 
   return (
@@ -106,53 +118,3 @@ const Table = forwardRef(function Table(props, ref) {
     </table>
   )
 })
-
-// {/* <table id='myTable' ref={tableRef} className="w-full mx-auto table-auto overflow-scroll border text-xs font-light">  
-//           <thead className='text-xs'>
-//             <tr className="text-center text-xs">
-//               <th className="border dark:border-neutral-500 text-xs" rowSpan={3}>Ступень <br/>толщины, см</th>
-//               <th className="border dark:border-neutral-500 text-xs" colSpan={6}>Число деревьев по породам, шт.</th>
-//               <th className="border dark:border-neutral-500 text-xs" colSpan={2}>Число единичных и групповых семенных деревьев (семенников) по породам</th>
-//               <th className="border dark:border-neutral-500 text-xs" colSpan={4}>Модельные деревья для определения разряда высот</th>
-//             </tr>
-
-//             <tr className="text-center">
-//               <th className="border dark:border-neutral-500 text-xs" colSpan={3}>порода 1</th>
-//               <th className="border dark:border-neutral-500 text-xs" colSpan={3}>порода 2</th>   
-//               <th className="border dark:border-neutral-500 text-xs" rowSpan={2}>порода 1</th>
-//               <th className="border dark:border-neutral-500 text-xs" rowSpan={2}>порода 2</th> 
-//               <th className="border dark:border-neutral-500 text-xs" rowSpan={2}>порода</th>
-//               <th className="border dark:border-neutral-500 text-xs" rowSpan={2}>диаметр с округл. до 1 см</th> 
-//               <th className="border dark:border-neutral-500 text-xs" rowSpan={2}>высота с округл. до 0,5 м</th>
-//               <th className="border dark:border-neutral-500 text-xs" rowSpan={2}>разряд высот</th> 
-//             </tr>
-//             <tr className="text-center">
-//               <th className="border dark:border-neutral-500 text-xs">деловых</th>
-//               <th className="border dark:border-neutral-500 text-xs">полудел.</th> 
-//               <th className="border dark:border-neutral-500 text-xs">дровяных</th>
-//               <th className="border dark:border-neutral-500 text-xs">деловых</th>
-//               <th className="border dark:border-neutral-500 text-xs">полудел.</th> 
-//               <th className="border dark:border-neutral-500 text-xs">дровяных</th>
-//             </tr>
-//           </thead>
-//           <tbody className='text-center'>
-//             {/* Цикл по значениям первого столбца */}
-//             {thicknessStep.map(thickness => (
-//               <tr className="text-center border dark:border-neutral-400 text-center">
-//               <td className="border dark:border-neutral-400">{thickness}</td>
-//               <td className="border dark:border-neutral-400"><input type='text' className='text-center' /* size={3}  */></input></td>
-//               <td className="border dark:border-neutral-400"><input type='text' className='text-center' /* size={3}  */></input></td>
-//               <td className="border dark:border-neutral-400"><input type='text' className='text-center' /* size={3}  */></input></td>
-//               <td className="border dark:border-neutral-400"><input type='text' className='text-center' /* size={3}  */></input></td>
-//               <td className="border dark:border-neutral-400"><input type='text' className='text-center' /* size={3}  */></input></td>
-//               <td className="border dark:border-neutral-400"><input type='text' className='text-center' /* size={3}  */></input></td>
-//               <td className="border dark:border-neutral-400"><input type='text' className='text-center' /* size={15} */></input></td>
-//               <td className="border dark:border-neutral-400"><input type='text' className='text-center' /* size={15} */></input></td>
-//               <td className="border dark:border-neutral-400"><input type='text' className='text-center' /* size={3}  */></input></td>
-//               <td className="border dark:border-neutral-400"><input type='text' className='text-center' /* size={7}  */></input></td>
-//               <td className="border dark:border-neutral-400"><input type='text' className='text-center' /* size={7}  */></input></td>
-//               <td className="border dark:border-neutral-400"><input type='text' className='text-center' /* size={3}  */></input></td>
-//             </tr>
-//             ))}
-//           </tbody>
-//         </table> */}
