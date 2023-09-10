@@ -29,8 +29,8 @@ export default function Home() {
     }
 
     const jsonValues = JSON.stringify(values);
-    console.log(jsonValues);
-    console.log(jsonValues.length);
+    // console.log(jsonValues);
+    // console.log(jsonValues.length);
 
     fetch('http://localhost:8000/tree-count/', {
       method: 'POST',
@@ -40,7 +40,10 @@ export default function Home() {
       body: jsonValues,
     })
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => {
+      console.log(data);
+      // TODO: build new table with response data
+    })
     .catch((error) => {
       console.error('Error:', error);
     });
