@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 ]
 
-CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1']
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
